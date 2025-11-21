@@ -3,511 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторная работа 1 - JavaScript</title>
+    <title>Лабораторная работа №2</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #333;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
+            font-family: Arial, sans-serif;
+            max-width: 800px;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(90deg, #2c3e50, #4a6491);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 5px solid #fdbb2d;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .tasks-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-            padding: 25px;
-        }
-        
-        .task-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 5px solid #4a6491;
+            line-height: 1.6;
         }
-        
-        .task-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .task-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .task-title {
-            font-size: 1.4rem;
-            color: #2c3e50;
-        }
-        
-        .task-number {
-            background: #4a6491;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .task-description {
-            margin-bottom: 15px;
-            color: #555;
-            line-height: 1.5;
-        }
-        
-        .task-btn {
-            background: linear-gradient(90deg, #3498db, #2c3e50);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-            width: 100%;
-        }
-        
-        .task-btn:hover {
-            background: linear-gradient(90deg, #2980b9, #34495e);
-        }
-        
-        .result-area {
-            margin-top: 15px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            border-left: 3px solid #3498db;
-            min-height: 50px;
-            font-family: monospace;
-            white-space: pre-wrap;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
-            margin-top: 20px;
-        }
-        
-        .console-output {
-            background: #2c3e50;
-            color: #00ff00;
+        .task {
+            margin-bottom: 30px;
             padding: 15px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            margin-top: 20px;
-            font-family: 'Courier New', monospace;
-            max-height: 200px;
-            overflow-y: auto;
         }
-        
-        .console-title {
-            color: white;
-            margin-bottom: 10px;
-            font-weight: bold;
+        .result {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 3px;
         }
-        
-        @media (max-width: 768px) {
-            .tasks-container {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
+        h1, h2 {
+            color: #333;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Лабораторная работа 1</h1>
-            <p class="subtitle">Работа с числами, строками и условными выражениями в JavaScript</p>
-        </header>
-        
-        <div class="tasks-container">
-            <!-- Задание 1 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 1</h2>
-                    <div class="task-number">1</div>
-                </div>
-                <p class="task-description">Задать три числовых переменных x=10, y=15, z=0. Посчитать и вывести результат выражения: x + y/z</p>
-                <button class="task-btn" onclick="task1()">Выполнить задание</button>
-                <div class="result-area" id="result1"></div>
-            </div>
-            
-            <!-- Задание 2 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 2</h2>
-                    <div class="task-number">2</div>
-                </div>
-                <p class="task-description">Работа со строковыми и числовыми переменными. Сложение строк и чисел.</p>
-                <button class="task-btn" onclick="task2()">Выполнить задание</button>
-                <div class="result-area" id="result2"></div>
-            </div>
-            
-            <!-- Задание 3 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 3</h2>
-                    <div class="task-number">3</div>
-                </div>
-                <p class="task-description">Создать строку с использованием шаблонных литералов: "Результат = " и сумма двух чисел.</p>
-                <button class="task-btn" onclick="task3()">Выполнить задание</button>
-                <div class="result-area" id="result3"></div>
-            </div>
-            
-            <!-- Задание 4 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 4</h2>
-                    <div class="task-number">4</div>
-                </div>
-                <p class="task-description">Проверка строки на палиндром (одинаково читается в прямом и обратном порядке).</p>
-                <button class="task-btn" onclick="task4()">Выполнить задание</button>
-                <div class="result-area" id="result4"></div>
-            </div>
-            
-            <!-- Задание 5 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 5</h2>
-                    <div class="task-number">5</div>
-                </div>
-                <p class="task-description">Найти наибольшее из трёх чисел.</p>
-                <button class="task-btn" onclick="task5()">Выполнить задание</button>
-                <div class="result-area" id="result5"></div>
-            </div>
-            
-            <!-- Задание 6 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 6</h2>
-                    <div class="task-number">6</div>
-                </div>
-                <p class="task-description">Вычисление площади треугольника по трём сторонам (формула Герона).</p>
-                <button class="task-btn" onclick="task6()">Выполнить задание</button>
-                <div class="result-area" id="result6"></div>
-            </div>
-            
-            <!-- Задание 7 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 7</h2>
-                    <div class="task-number">7</div>
-                </div>
-                <p class="task-description">Использование оператора switch для проверки числа.</p>
-                <button class="task-btn" onclick="task7()">Выполнить задание</button>
-                <div class="result-area" id="result7"></div>
-            </div>
-            
-            <!-- Задание 8 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 8</h2>
-                    <div class="task-number">8</div>
-                </div>
-                <p class="task-description">Определение дня недели по числу от 1 до 7.</p>
-                <button class="task-btn" onclick="task8()">Выполнить задание</button>
-                <div class="result-area" id="result8"></div>
-            </div>
-            
-            <!-- Задание 9 -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Задание 9</h2>
-                    <div class="task-number">9</div>
-                </div>
-                <p class="task-description">Использование оператора ?? для присвоения значения по умолчанию.</p>
-                <button class="task-btn" onclick="task9()">Выполнить задание</button>
-                <div class="result-area" id="result9"></div>
-            </div>
-            
-            <!-- Дополнительное задание -->
-            <div class="task-card">
-                <div class="task-header">
-                    <h2 class="task-title">Дополнительное задание</h2>
-                    <div class="task-number">10</div>
-                </div>
-                <p class="task-description">Проверка URL на валидность с помощью регулярных выражений.</p>
-                <button class="task-btn" onclick="validateURL()">Проверить URL</button>
-                <div class="result-area" id="result10"></div>
-            </div>
-        </div>
-        
-        <div class="console-output">
-            <div class="console-title">Консоль вывода:</div>
-            <div id="console"></div>
-        </div>
-        
-        <footer>
-            <p>Лабораторная работа по JavaScript - Работа с числами, строками и условными выражениями</p>
-        </footer>
+    <h1>Лабораторная работа №2</h1>
+    
+    <!-- Задание 1 -->
+    <div class="task">
+        <h2>Задание 1: Проверка делимости на 3</h2>
+        <div id="task1-result" class="result"></div>
+    </div>
+    
+    <!-- Задание 2 -->
+    <div class="task">
+        <h2>Задание 2: Список типов элементов</h2>
+        <div id="task2-result" class="result"></div>
+    </div>
+    
+    <!-- Задание 3 -->
+    <div class="task">
+        <h2>Задание 3: Преобразование регистра строки</h2>
+        <div id="task3-result" class="result"></div>
+    </div>
+    
+    <!-- Задание 4 -->
+    <div class="task">
+        <h2>Задание 4: Сумма числовых элементов массива</h2>
+        <div id="task4-result" class="result"></div>
+    </div>
+    
+    <!-- Задание 5 -->
+    <div class="task">
+        <h2>Задание 5: Простые числа</h2>
+        <div id="task5-result" class="result"></div>
+    </div>
+    
+    <!-- Задание 6 -->
+    <div class="task">
+        <h2>Задание 6: Сортировка массивов</h2>
+        <div id="task6-result" class="result"></div>
+    </div>
+    
+    <!-- Задание 7 -->
+    <div class="task">
+        <h2>Задание 7: День недели через N дней</h2>
+        <div id="task7-result" class="result"></div>
     </div>
 
     <script>
-        // Функция для вывода в консоль на странице
-        function logToPage(message) {
-            const consoleElem = document.getElementById('console');
-            consoleElem.innerHTML += message + '\n';
-            consoleElem.scrollTop = consoleElem.scrollHeight;
-        }
-        
-        // Очистка консоли
-        function clearConsole() {
-            document.getElementById('console').innerHTML = '';
-        }
-        
         // Задание 1
         function task1() {
-            clearConsole();
-            let x = 10, y = 15, z = 0;
-            let result = x + y / z;
+            const number = 123456789;
+            const remainder = number % 3;
+            const sumOfDigits = number.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+            const sumDivisibleBy3 = sumOfDigits % 3 === 0;
             
-            document.getElementById('result1').innerHTML = `x = ${x}, y = ${y}, z = ${z}\nРезультат: x + y/z = ${result}`;
-            logToPage(`Задание 1: x + y/z = ${result}`);
+            const result = `
+                Число: ${number}<br>
+                Способ 1 (остаток от деления): ${number} % 3 = ${remainder} → ${remainder === 0 ? 'делится' : 'не делится'}<br>
+                Способ 2 (сумма цифр): ${number.toString().split('').join('+')} = ${sumOfDigits} → ${sumOfDigits} % 3 = ${sumOfDigits % 3} → ${sumDivisibleBy3 ? 'делится' : 'не делится'}
+            `;
+            
+            document.getElementById('task1-result').innerHTML = result;
         }
         
         // Задание 2
         function task2() {
-            clearConsole();
-            let s1 = "123", s2 = "456", s3 = "name";
-            let n = 123;
+            const elements = [
+                null,
+                5,
+                "teststring",
+                [1, 2, "str1"],
+                function(a, b) { return a + b; }
+            ];
             
-            let result1 = s1 + s2;
-            let result2 = n + s2;
-            let result3 = n + s3;
+            let listHTML = '<ul>';
+            elements.forEach(element => {
+                listHTML += `<li>${element} → тип: ${typeof element}</li>`;
+            });
+            listHTML += '</ul>';
             
-            let output = `s1 + s2 = "${result1}"\nn + s2 = "${result2}"\nn + s3 = "${result3}"`;
-            
-            document.getElementById('result2').innerHTML = output;
-            logToPage("Задание 2:");
-            logToPage(`s1 + s2 = "${result1}"`);
-            logToPage(`n + s2 = "${result2}"`);
-            logToPage(`n + s3 = "${result3}"`);
-            logToPage("Объяснение: оператор + со строками выполняет конкатенацию, числа автоматически преобразуются в строки");
+            document.getElementById('task2-result').innerHTML = listHTML;
         }
         
         // Задание 3
         function task3() {
-            clearConsole();
-            let num1 = 123, num2 = 456;
-            let resultString = `Результат = ${num1 + num2}`;
+            const inputString = "A1b2C3d4E5g6H";
             
-            document.getElementById('result3').innerHTML = resultString;
-            logToPage(`Задание 3: ${resultString}`);
+            function swapCase(str) {
+                return str.split('').map(char => {
+                    if (char === char.toUpperCase()) {
+                        return char.toLowerCase();
+                    } else {
+                        return char.toUpperCase();
+                    }
+                }).join('');
+            }
+            
+            const resultString = swapCase(inputString);
+            
+            document.getElementById('task3-result').innerHTML = `
+                Исходная строка: ${inputString}<br>
+                Результат: ${resultString}
+            `;
         }
         
         // Задание 4
         function task4() {
-            clearConsole();
-            let poly = "abcdedcba", test = "teststring";
+            const array1 = [2, "name", 4.5, "str1", "str2", 9, ["true", "false"], 0.5];
+            const array2 = ["name", "str1", "str2", ["true", "false"]];
             
-            function isPalindrome(str) {
-                return str === str.split('').reverse().join('');
+            function sumOfNumbers(arr) {
+                let sum = 0;
+                let hasNumbers = false;
+                
+                arr.forEach(element => {
+                    if (typeof element === 'number') {
+                        sum += element;
+                        hasNumbers = true;
+                    }
+                });
+                
+                return hasNumbers ? sum : 'числовых элементов нет';
             }
             
-            let result1 = isPalindrome(poly);
-            let result2 = isPalindrome(test);
-            
-            document.getElementById('result4').innerHTML = `"${poly}" - палиндром: ${result1}\n"${test}" - палиндром: ${result2}`;
-            logToPage(`Задание 4: "${poly}" - палиндром: ${result1}`);
-            logToPage(`Задание 4: "${test}" - палиндром: ${result2}`);
+            document.getElementById('task4-result').innerHTML = `
+                Массив 1: [${array1.join(', ')}]<br>
+                Сумма числовых элементов: ${sumOfNumbers(array1)}<br><br>
+                Массив 2: [${array2.join(', ')}]<br>
+                Сумма числовых элементов: ${sumOfNumbers(array2)}
+            `;
         }
         
         // Задание 5
         function task5() {
-            clearConsole();
-            let a = 15, b = 8, c = 23;
-            let max = a;
+            function isPrime(num) {
+                if (num <= 1) return false;
+                if (num <= 3) return true;
+                if (num % 2 === 0 || num % 3 === 0) return false;
+                
+                for (let i = 5; i * i <= num; i += 6) {
+                    if (num % i === 0 || num % (i + 2) === 0) return false;
+                }
+                
+                return true;
+            }
             
-            if (b > max) max = b;
-            if (c > max) max = c;
+            function findPrimesInRange(start, end) {
+                const primes = [];
+                for (let i = start; i <= end; i++) {
+                    if (isPrime(i)) {
+                        primes.push(i);
+                    }
+                }
+                return primes;
+            }
             
-            document.getElementById('result5').innerHTML = `Числа: ${a}, ${b}, ${c}\nНаибольшее: ${max}`;
-            logToPage(`Задание 5: Наибольшее из ${a}, ${b}, ${c} = ${max}`);
+            const primes = findPrimesInRange(1, 100);
+            
+            document.getElementById('task5-result').innerHTML = `
+                Простые числа от 1 до 100:<br>
+                ${primes.join(', ')}<br><br>
+                Всего: ${primes.length} простых чисел
+            `;
         }
         
         // Задание 6
         function task6() {
-            clearConsole();
-            // Для демонстрации используем тестовые значения
-            let sides = [
-                {a: 5, b: 6, c: 7},
-                {a: 10, b: 12, c: 25}
-            ];
+            const numericArray = [32, 7, 90, -4, 15, 900, 64];
+            const stringArray = ['HTML', 'RUBY', 'CSS', 'Python', 'C++'];
             
-            function calculateArea(a, b, c) {
-                // Проверка на существование треугольника
-                if (a + b > c && a + c > b && b + c > a) {
-                    // Формула Герона
-                    let p = (a + b + c) / 2;
-                    return Math.sqrt(p * (p - a) * (p - b) * (p - c)).toFixed(2);
-                } else {
-                    return "Треугольник не существует";
+            function sortArray(arr) {
+                // Для числового массива используем числовую сортировку
+                if (arr.every(item => typeof item === 'number')) {
+                    return [...arr].sort((a, b) => a - b);
                 }
+                // Для строкового массива используем строковую сортировку
+                return [...arr].sort();
             }
             
-            let output = "";
-            sides.forEach((triangle, index) => {
-                let area = calculateArea(triangle.a, triangle.b, triangle.c);
-                output += `Треугольник ${index+1}: стороны ${triangle.a}, ${triangle.b}, ${triangle.c}\n`;
-                output += `Площадь: ${area}\n\n`;
-                
-                logToPage(`Задание 6: Треугольник ${index+1}: стороны ${triangle.a}, ${triangle.b}, ${triangle.c}`);
-                logToPage(`Площадь: ${area}`);
-            });
-            
-            document.getElementById('result6').innerHTML = output;
+            document.getElementById('task6-result').innerHTML = `
+                Числовой массив: [${numericArray.join(', ')}]<br>
+                Отсортированный: [${sortArray(numericArray).join(', ')}]<br><br>
+                Строковый массив: [${stringArray.join(', ')}]<br>
+                Отсортированный: [${sortArray(stringArray).join(', ')}]
+            `;
         }
         
         // Задание 7
         function task7() {
-            clearConsole();
-            let number = parseInt(prompt("Введите число:"));
-            let message;
-            
-            switch(number) {
-                case 1:
-                    message = "Равно 1";
-                    break;
-                case 2:
-                    message = "Равно 2";
-                    break;
-                case 3:
-                    message = "Равно 3";
-                    break;
-                default:
-                    message = "Не равно 1, 2, 3";
+            function getWeekdayAfterDays(days) {
+                const daysOfWeek = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
+                const today = new Date();
+                const targetDate = new Date(today);
+                targetDate.setDate(today.getDate() + days);
+                
+                return daysOfWeek[targetDate.getDay()];
             }
             
-            document.getElementById('result7').innerHTML = `Введено число: ${number}\nРезультат: ${message}`;
-            logToPage(`Задание 7: Введено число ${number} - ${message}`);
+            document.getElementById('task7-result').innerHTML = `
+                Через 5 дней будет: ${getWeekdayAfterDays(5)}<br>
+                Через 177 дней будет: ${getWeekdayAfterDays(177)}
+            `;
         }
         
-        // Задание 8
-        function task8() {
-            clearConsole();
-            let dayNumber = parseInt(prompt("Введите число от 1 до 7:"));
-            let dayName;
-            
-            switch(dayNumber) {
-                case 1:
-                    dayName = "Понедельник";
-                    break;
-                case 2:
-                    dayName = "Вторник";
-                    break;
-                case 3:
-                    dayName = "Среда";
-                    break;
-                case 4:
-                    dayName = "Четверг";
-                    break;
-                case 5:
-                    dayName = "Пятница";
-                    break;
-                case 6:
-                    dayName = "Суббота";
-                    break;
-                case 7:
-                    dayName = "Воскресенье";
-                    break;
-                default:
-                    dayName = "Неверный номер дня";
-            }
-            
-            document.getElementById('result8').innerHTML = `Число: ${dayNumber}\nДень недели: ${dayName}`;
-            logToPage(`Задание 8: Число ${dayNumber} - ${dayName}`);
-        }
-        
-        // Задание 9
-        function task9() {
-            clearConsole();
-            let userInput = prompt("Введите значение (или оставьте пустым):");
-            let value = userInput ?? "значение по умолчанию";
-            
-            document.getElementById('result9').innerHTML = `Введено: "${userInput}"\nРезультат: "${value}"`;
-            logToPage(`Задание 9: Введено "${userInput}", результат: "${value}"`);
-        }
-        
-        // Дополнительное задание - проверка URL
-        function validateURL() {
-            clearConsole();
-            let url = prompt("Введите URL для проверки:");
-            
-            function isValidURL(url) {
-                const pattern = /^(https?:\/\/).+\.(php|html)$/;
-                return pattern.test(url);
-            }
-            
-            let isValid = isValidURL(url);
-            let message = isValid ? "валидный" : "не валидный";
-            
-            document.getElementById('result10').innerHTML = `URL: ${url}\nРезультат проверки: ${message}`;
-            logToPage(`Доп. задание: URL "${url}" - ${message}`);
-            
-            // Тестовые примеры
-            logToPage("\nТестовые примеры:");
-            let testURLs = [
-                "http://site.ru/index.php",
-                "https://site.com/page.html", 
-                "http://site.com",
-                "site.ru/index.php",
-                "ftp://site.ru/page.php"
-            ];
-            
-            testURLs.forEach(testUrl => {
-                logToPage(`${testUrl} - ${isValidURL(testUrl) ? "валидный" : "не валидный"}`);
-            });
-        }
+        // Запуск всех заданий при загрузке страницы
+        window.onload = function() {
+            task1();
+            task2();
+            task3();
+            task4();
+            task5();
+            task6();
+            task7();
+        };
     </script>
 </body>
-
 </html>
