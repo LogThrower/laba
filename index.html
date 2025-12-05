@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторная работа №2</title>
+    <title>Лабораторная работа №3</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
@@ -32,219 +32,306 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #clock {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Лабораторная работа №2</h1>
+    <h1>Лабораторная работа №3</h1>
     
     <!-- Задание 1 -->
     <div class="task">
-        <h2>Задание 1: Проверка делимости на 3</h2>
+        <h2>Задание 1: Конвертер дюймов в сантиметры</h2>
+        <button onclick="convertInches()">Запустить конвертер</button>
         <div id="task1-result" class="result"></div>
     </div>
     
     <!-- Задание 2 -->
     <div class="task">
-        <h2>Задание 2: Список типов элементов</h2>
+        <h2>Задание 2: Таблица значений тригонометрических функций</h2>
         <div id="task2-result" class="result"></div>
     </div>
     
     <!-- Задание 3 -->
     <div class="task">
-        <h2>Задание 3: Преобразование регистра строки</h2>
+        <h2>Задание 3: Конвертер двоичных чисел в десятичные</h2>
         <div id="task3-result" class="result"></div>
     </div>
     
     <!-- Задание 4 -->
     <div class="task">
-        <h2>Задание 4: Сумма числовых элементов массива</h2>
+        <h2>Задание 4: Метод бисекции для нахождения корней</h2>
         <div id="task4-result" class="result"></div>
     </div>
     
     <!-- Задание 5 -->
     <div class="task">
-        <h2>Задание 5: Простые числа</h2>
-        <div id="task5-result" class="result"></div>
+        <h2>Задание 5: Часы</h2>
+        <div id="clock">00:00:00</div>
     </div>
     
     <!-- Задание 6 -->
     <div class="task">
-        <h2>Задание 6: Сортировка массивов</h2>
+        <h2>Задание 6: Поиск объекта в массиве</h2>
         <div id="task6-result" class="result"></div>
     </div>
     
     <!-- Задание 7 -->
     <div class="task">
-        <h2>Задание 7: День недели через N дней</h2>
+        <h2>Задание 7: Работа со значениями объекта</h2>
         <div id="task7-result" class="result"></div>
+    </div>
+    
+    <!-- Задание 8 -->
+    <div class="task">
+        <h2>Задание 8: Модификация объекта</h2>
+        <div id="task8-result" class="result"></div>
     </div>
 
     <script>
         // Задание 1
-        function task1() {
-            const number = 123456789;
-            const remainder = number % 3;
-            const sumOfDigits = number.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
-            const sumDivisibleBy3 = sumOfDigits % 3 === 0;
+        function convertInches() {
+            let ins = window.prompt('Величина в дюймах', 0);
             
-            const result = `
-                Число: ${number}<br>
-                Способ 1 (остаток от деления): ${number} % 3 = ${remainder} → ${remainder === 0 ? 'делится' : 'не делится'}<br>
-                Способ 2 (сумма цифр): ${number.toString().split('').join('+')} = ${sumOfDigits} → ${sumOfDigits} % 3 = ${sumOfDigits % 3} → ${sumDivisibleBy3 ? 'делится' : 'не делится'}
+            // Заменяем запятую на точку
+            ins = ins.replace(',', '.');
+            
+            const cents = ins * 2.54;
+            document.getElementById('task1-result').innerHTML = `
+                Введенное значение: ${ins} дюймов<br>
+                Результат: ${cents} см
             `;
-            
-            document.getElementById('task1-result').innerHTML = result;
         }
         
         // Задание 2
         function task2() {
-            const elements = [
-                null,
-                5,
-                "teststring",
-                [1, 2, "str1"],
-                function(a, b) { return a + b; }
-            ];
+            const degrees = [0, 15, 30, 45, 60, 75, 90];
             
-            let listHTML = '<ul>';
-            elements.forEach(element => {
-                listHTML += `<li>${element} → тип: ${typeof element}</li>`;
+            let tableHTML = `
+                <table>
+                    <tr>
+                        <th>Угол (градусы)</th>
+                        <th>Угол (радианы)</th>
+                        <th>sin(x)</th>
+                        <th>cos(x)</th>
+                        <th>tg(x)</th>
+                    </tr>
+            `;
+            
+            degrees.forEach(deg => {
+                const rad = deg * Math.PI / 180;
+                const sinVal = Math.sin(rad);
+                const cosVal = Math.cos(rad);
+                const tanVal = deg !== 90 ? Math.tan(rad) : '∞'; // tg(90°) не определен
+                
+                tableHTML += `
+                    <tr>
+                        <td>${deg}°</td>
+                        <td>${rad.toFixed(4)}</td>
+                        <td>${sinVal.toFixed(4)}</td>
+                        <td>${cosVal.toFixed(4)}</td>
+                        <td>${typeof tanVal === 'number' ? tanVal.toFixed(4) : tanVal}</td>
+                    </tr>
+                `;
             });
-            listHTML += '</ul>';
             
-            document.getElementById('task2-result').innerHTML = listHTML;
+            tableHTML += '</table>';
+            document.getElementById('task2-result').innerHTML = tableHTML;
         }
         
         // Задание 3
         function task3() {
-            const inputString = "A1b2C3d4E5g6H";
-            
-            function swapCase(str) {
-                return str.split('').map(char => {
-                    if (char === char.toUpperCase()) {
-                        return char.toLowerCase();
-                    } else {
-                        return char.toUpperCase();
+            function binaryToDecimal(binaryStr) {
+                let decimal = 0;
+                for (let i = 0; i < binaryStr.length; i++) {
+                    if (binaryStr[i] === '1') {
+                        decimal += Math.pow(2, binaryStr.length - 1 - i);
                     }
-                }).join('');
+                }
+                return decimal;
             }
             
-            const resultString = swapCase(inputString);
+            const test1 = '110011';
+            const test2 = '111';
             
             document.getElementById('task3-result').innerHTML = `
-                Исходная строка: ${inputString}<br>
-                Результат: ${resultString}
+                Двоичное число '${test1}' = ${binaryToDecimal(test1)} в десятичной системе<br>
+                Двоичное число '${test2}' = ${binaryToDecimal(test2)} в десятичной системе
             `;
         }
         
         // Задание 4
         function task4() {
-            const array1 = [2, "name", 4.5, "str1", "str2", 9, ["true", "false"], 0.5];
-            const array2 = ["name", "str1", "str2", ["true", "false"]];
-            
-            function sumOfNumbers(arr) {
-                let sum = 0;
-                let hasNumbers = false;
+            function bisect(equ, a, b, eps) {
+                let iterations = 0;
+                let x;
                 
-                arr.forEach(element => {
-                    if (typeof element === 'number') {
-                        sum += element;
-                        hasNumbers = true;
+                while ((b - a) > eps) {
+                    iterations++;
+                    x = (a + b) / 2;
+                    
+                    if (equ(a) * equ(x) < 0) {
+                        b = x;
+                    } else {
+                        a = x;
                     }
-                });
+                }
                 
-                return hasNumbers ? sum : 'числовых элементов нет';
+                return {
+                    root: (a + b) / 2,
+                    iterations: iterations
+                };
             }
             
+            // Функции для проверки
+            const equ1 = x => x * x - Math.cos(x);
+            const equ2 = x => Math.pow(x, 4) + 1.5 - Math.sin(x);
+            
+            const result1 = bisect(equ1, 0, 1, 0.001);
+            const result2 = bisect(equ2, 0, 1, 0.001);
+            
             document.getElementById('task4-result').innerHTML = `
-                Массив 1: [${array1.join(', ')}]<br>
-                Сумма числовых элементов: ${sumOfNumbers(array1)}<br><br>
-                Массив 2: [${array2.join(', ')}]<br>
-                Сумма числовых элементов: ${sumOfNumbers(array2)}
+                <strong>Функция 1: x² - cos(x)</strong><br>
+                Корень: ${result1.root.toFixed(6)}<br>
+                Количество итераций: ${result1.iterations}<br><br>
+                
+                <strong>Функция 2: x⁴ + 1.5 - sin(x)</strong><br>
+                Корень: ${result2.root.toFixed(6)}<br>
+                Количество итераций: ${result2.iterations}
             `;
         }
         
         // Задание 5
         function task5() {
-            function isPrime(num) {
-                if (num <= 1) return false;
-                if (num <= 3) return true;
-                if (num % 2 === 0 || num % 3 === 0) return false;
+            function updateClock() {
+                const now = new Date();
+                let hours = now.getHours();
+                let minutes = now.getMinutes();
+                let seconds = now.getSeconds();
                 
-                for (let i = 5; i * i <= num; i += 6) {
-                    if (num % i === 0 || num % (i + 2) === 0) return false;
-                }
+                // Добавляем ведущие нули
+                hours = hours < 10 ? '0' + hours : hours;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
                 
-                return true;
+                document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
             }
             
-            function findPrimesInRange(start, end) {
-                const primes = [];
-                for (let i = start; i <= end; i++) {
-                    if (isPrime(i)) {
-                        primes.push(i);
-                    }
-                }
-                return primes;
-            }
-            
-            const primes = findPrimesInRange(1, 100);
-            
-            document.getElementById('task5-result').innerHTML = `
-                Простые числа от 1 до 100:<br>
-                ${primes.join(', ')}<br><br>
-                Всего: ${primes.length} простых чисел
-            `;
+            // Обновляем часы каждую секунду
+            setInterval(updateClock, 1000);
+            updateClock(); // Первоначальный вызов
         }
         
         // Задание 6
         function task6() {
-            const numericArray = [32, 7, 90, -4, 15, 900, 64];
-            const stringArray = ['HTML', 'RUBY', 'CSS', 'Python', 'C++'];
-            
-            function sortArray(arr) {
-                // Для числового массива используем числовую сортировку
-                if (arr.every(item => typeof item === 'number')) {
-                    return [...arr].sort((a, b) => a - b);
+            let users = [
+                {
+                    name: "John",
+                    age: 30
+                },
+                {
+                    name: "Bob",
+                    age: 21
+                },
+                {
+                    name: "Anna",
+                    age: 19
                 }
-                // Для строкового массива используем строковую сортировку
-                return [...arr].sort();
-            }
+            ];
+            
+            const bob = users.find(user => user.name === "Bob");
             
             document.getElementById('task6-result').innerHTML = `
-                Числовой массив: [${numericArray.join(', ')}]<br>
-                Отсортированный: [${sortArray(numericArray).join(', ')}]<br><br>
-                Строковый массив: [${stringArray.join(', ')}]<br>
-                Отсортированный: [${sortArray(stringArray).join(', ')}]
+                Исходный массив: <pre>${JSON.stringify(users, null, 2)}</pre><br>
+                Найденный объект (name == "Bob"): <pre>${JSON.stringify(bob, null, 2)}</pre>
             `;
         }
         
         // Задание 7
         function task7() {
-            function getWeekdayAfterDays(days) {
-                const daysOfWeek = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
-                const today = new Date();
-                const targetDate = new Date(today);
-                targetDate.setDate(today.getDate() + days);
-                
-                return daysOfWeek[targetDate.getDay()];
+            function getAllValues(obj) {
+                return Object.values(obj);
             }
             
+            let an_obj = { 100: 'a', 2: 'b', 7: 'c' };
+            
             document.getElementById('task7-result').innerHTML = `
-                Через 5 дней будет: ${getWeekdayAfterDays(5)}<br>
-                Через 177 дней будет: ${getWeekdayAfterDays(177)}
+                Исходный объект: <pre>${JSON.stringify(an_obj, null, 2)}</pre><br>
+                Все значения: [${getAllValues(an_obj).join(', ')}]
+            `;
+        }
+        
+        // Задание 8
+        function task8() {
+            function addLogProperties(obj) {
+                for (let key in obj) {
+                    if (typeof obj[key] === 'number') {
+                        obj[`log_${key}`] = Math.log10(obj[key]);
+                    }
+                }
+                return obj;
+            }
+            
+            function removeNonNumericProperties(obj) {
+                for (let key in obj) {
+                    if (typeof obj[key] !== 'number') {
+                        delete obj[key];
+                    }
+                }
+                return obj;
+            }
+            
+            let menu = {
+                width: 200,
+                height: 300,
+                title: "My menu"
+            };
+            
+            const menuWithLogs = addLogProperties({...menu});
+            const menuNumericOnly = removeNonNumericProperties({...menu});
+            
+            document.getElementById('task8-result').innerHTML = `
+                <strong>Исходный объект:</strong><br>
+                <pre>${JSON.stringify(menu, null, 2)}</pre><br>
+                
+                <strong>После добавления логарифмических свойств:</strong><br>
+                <pre>${JSON.stringify(menuWithLogs, null, 2)}</pre><br>
+                
+                <strong>После удаления нечисловых свойств:</strong><br>
+                <pre>${JSON.stringify(menuNumericOnly, null, 2)}</pre>
             `;
         }
         
         // Запуск всех заданий при загрузке страницы
         window.onload = function() {
-            task1();
             task2();
             task3();
             task4();
             task5();
             task6();
             task7();
+            task8();
         };
     </script>
 </body>
